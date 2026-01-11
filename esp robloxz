@@ -1,0 +1,29 @@
+-- ESP dengan auto-update
+local Version = "3.1"
+local MainScript = "https://github.com/wanzzz894/Deface-TOOLS-/blob/main/esp%20robloxz"
+local BackupScript = "https://pastebin.com/raw/QgS6kzKA"
+
+-- Function untuk load script
+local function LoadESP(url)
+    local success, response = pcall(function()
+        return game:HttpGet(url, true)
+    end)
+    
+    if success then
+        loadstring(response)()
+        return true
+    end
+    return false
+end
+
+-- Coba load dari GitHub
+if not LoadESP(MainScript) then
+    -- Fallback ke Pastebin
+    if not LoadESP(BackupScript) then
+        -- Local fallback
+        loadstring([[
+            print("Loading local ESP...")
+            -- Local ESP code here
+        ]])()
+    end
+end
